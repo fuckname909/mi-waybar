@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════════════
+   WAYBAR — DARK CYBER / GLASSMORPHISM
+   Para: Hyprland + Arch Linux
+   Estilo: Cyberseg & Gaming | Transparente | Oscuro
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── VARIABLES ───────────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* ─── COLORES BASE ────────────────────────────────────────────── */
+/* 
+    bg:         rgba(10, 10, 18, 0.85)   — negro azulado semi-transparente
+    surface:    rgba(20, 22, 38, 0.80)   — superficie módulos
+    accent:     #00d4ff                   — cyan eléctrico
+    accent2:    #7c3aed                   — violeta cyberpunk
+    green:      #39ff6e                   — verde neón (CPU normal)
+    yellow:     #ffd700                   — amarillo advertencia
+    red:        #ff3355                   — rojo crítico
+    text:       #c8d3e8                   — texto principal
+    muted:      #5a6a8a                   — texto secundario
+*/
+
+/* ─── BARRA PRINCIPAL ─────────────────────────────────────────── */
+window#waybar {
+    background: rgba(8, 10, 20, 0.82);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 12px;
+    color: #c8d3e8;
+    transition: background 0.3s ease;
+}
+
+window#waybar.hidden {
+    opacity: 0;
+}
+
+/* Glassmorphism blur (requiere compositor con blur activo en Hyprland) */
+window#waybar.solo {
+    background: rgba(8, 10, 20, 0.75);
+}
+
+/* ─── TOOLTIP ─────────────────────────────────────────────────── */
+tooltip {
+    background: rgba(10, 12, 24, 0.95);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    color: #c8d3e8;
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+tooltip label {
+    color: #c8d3e8;
+}
+
+/* ─── MÓDULOS BASE ────────────────────────────────────────────── */
+.modules-left,
+.modules-right,
+.modules-center {
+    background: transparent;
+}
+
+#workspaces,
+#window,
+#clock,
+#network,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#pulseaudio,
+#tray {
+    background: rgba(18, 20, 36, 0.75);
+    border: 1px solid rgba(0, 212, 255, 0.10);
+    border-radius: 8px;
+    color: #c8d3e8;
+    margin: 4px 2px;
+    padding: 2px 12px;
+    transition: all 0.25s ease;
+}
+
+/* Hover general */
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#battery:hover,
+#pulseaudio:hover {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.35);
+    color: #00d4ff;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.12);
+}
+
+/* ─── WORKSPACES ──────────────────────────────────────────────── */
+#workspaces {
+    padding: 2px 6px;
+    background: rgba(18, 20, 36, 0.80);
+    border-color: rgba(124, 58, 237, 0.20);
+    gap: 2px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: #5a6a8a;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin: 1px;
+    min-width: 28px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(124, 58, 237, 0.15);
+    color: #a78bfa;
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.2);
+}
+
+#workspaces button.active {
+    background: rgba(0, 212, 255, 0.12);
+    color: #00d4ff;
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.20),
+                inset 0 0 8px rgba(0, 212, 255, 0.05);
+    font-weight: 700;
+}
+
+#workspaces button.urgent {
+    background: rgba(255, 51, 85, 0.15);
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.5);
+    animation: pulse-urgent 1s infinite;
+}
+
+@keyframes pulse-urgent {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 51, 85, 0.3); }
+    50%       { box-shadow: 0 0 16px rgba(255, 51, 85, 0.6); }
+}
+
+/* ─── VENTANA ACTIVA ──────────────────────────────────────────── */
+#window {
+    color: #8899bb;
+    font-size: 12px;
+    border-color: rgba(255,255,255, 0.05);
+    padding: 2px 14px;
+    font-style: italic;
+    max-width: 320px;
+}
+
+/* ─── RELOJ ─── (centro, protagonista) ───────────────────────── */
+#clock {
+    background: rgba(0, 212, 255, 0.07);
+    border-color: rgba(0, 212, 255, 0.25);
+    color: #00d4ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 18px;
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.10);
+}
+
+/* ─── RED ─────────────────────────────────────────────────────── */
+#network {
+    color: #39ff6e;
+    border-color: rgba(57, 255, 110, 0.12);
+}
+
+#network.disconnected {
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.3);
+    animation: pulse-urgent 2s infinite;
+}
+
+/* ─── CPU ─────────────────────────────────────────────────────── */
+#cpu {
+    color: #39ff6e;
+    border-color: rgba(57, 255, 110, 0.12);
+}
+
+/* CPU bajo carga */
+#cpu.warning {
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+#cpu.critical {
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.4);
+    box-shadow: 0 0 10px rgba(255, 51, 85, 0.2);
+}
+
+/* ─── MEMORIA ─────────────────────────────────────────────────── */
+#memory {
+    color: #a78bfa;
+    border-color: rgba(167, 139, 250, 0.12);
+}
+
+#memory.warning {
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+#memory.critical {
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.4);
+}
+
+/* ─── TEMPERATURA ─────────────────────────────────────────────── */
+#temperature {
+    color: #67e8f9;
+    border-color: rgba(103, 232, 249, 0.12);
+}
+
+#temperature.critical {
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.5);
+    animation: pulse-urgent 1.5s infinite;
+}
+
+/* ─── BATERÍA ─────────────────────────────────────────────────── */
+#battery {
+    color: #39ff6e;
+    border-color: rgba(57, 255, 110, 0.12);
+}
+
+#battery.charging {
+    color: #00d4ff;
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+#battery.warning:not(.charging) {
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+#battery.critical:not(.charging) {
+    color: #ff3355;
+    border-color: rgba(255, 51, 85, 0.5);
+    animation: pulse-urgent 1s infinite;
+}
+
+/* ─── AUDIO ───────────────────────────────────────────────────── */
+#pulseaudio {
+    color: #a78bfa;
+    border-color: rgba(167, 139, 250, 0.12);
+}
+
+#pulseaudio.muted {
+    color: #5a6a8a;
+    border-color: rgba(90, 106, 138, 0.2);
+}
+
+/* ─── TRAY ────────────────────────────────────────────────────── */
+#tray {
+    padding: 2px 8px;
+    border-color: rgba(255,255,255, 0.05);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(255, 51, 85, 0.15);
+    border-color: rgba(255, 51, 85, 0.4);
+    border-radius: 6px;
+}
+
+/* ─── SEPARADOR ───────────────────────────────────────────────── */
+#custom-sep {
+    background: transparent;
+    border: none;
+    color: rgba(0, 212, 255, 0.15);
+    font-size: 18px;
+    margin: 4px 0;
+    padding: 0 2px;
+}
